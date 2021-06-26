@@ -1,6 +1,14 @@
 defmodule Eforum do
   @forum_url "https://elixirforum.com"
 
+  def retreive(url \\ @forum_url) do
+    url
+    |> get()
+    |> parse()
+    |> get_topics()
+    |> display()
+  end
+
   defp get(url) do
     {:ok, response} =
       :get
@@ -30,13 +38,5 @@ defmodule Eforum do
 
   defp display(topics) do
     Enum.each(topics, &IO.puts/1)
-  end
-
-  def retreive(url \\ @forum_url) do
-    url
-    |> get()
-    |> parse()
-    |> get_topics()
-    |> display()
   end
 end
